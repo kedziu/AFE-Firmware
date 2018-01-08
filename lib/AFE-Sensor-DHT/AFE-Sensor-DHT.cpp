@@ -52,7 +52,6 @@ float AFESensorDHT::getHeatIndex() {
 
 boolean AFESensorDHT::temperatureSensorReady() {
   if (temperatureInBuffer) {
-    temperatureInBuffer = false;
     return true;
   } else {
     return false;
@@ -61,7 +60,6 @@ boolean AFESensorDHT::temperatureSensorReady() {
 
 boolean AFESensorDHT::humiditySensorReady() {
   if (humidityInBuffer) {
-    humidityInBuffer = false;
     return true;
   } else {
     return false;
@@ -70,41 +68,45 @@ boolean AFESensorDHT::humiditySensorReady() {
 
 void AFESensorDHT::listener() {
   if (_initialized) {
-    unsigned long temperatureTime = millis();
-    unsigned long humidityTime = temperatureTime;
+    unsigned long currentTime = millis();
 
+    /* This code make sure that temperature and humidity reads are not closer
+     * than 4sec */
     if (temperatureCounterStartTime == 0) {
-
-      if (configuration.temperature.interval ==
-              configuration.humidity.interval &&
-          humidityCounterStartTime == 0) {
-        temperatureCounterStartTime = temperatureTime - 4000;
-      } else {
-        temperatureCounterStartTime = temperatureTime;
+      temperatureCounterStartTime = currentTime;
+      if (humidityCounterStartTime != 0) {
+        if (abs((temperatureCounterStartTime +
+                 configuration.temperature.interval * 1000) -
+                (humidityCounterStartTime +
+                 configuration.humidity.interval * 1000)) <= 4000) {
+          temperatureCounterStartTime -= 5000;
+        }
       }
     }
 
     if (humidityCounterStartTime == 0) {
-      humidityCounterStartTime = humidityTime;
+      humidityCounterStartTime = currentTime;
+      if (abs((temperatureCounterStartTime +
+               configuration.temperature.interval * 1000) -
+              (humidityCounterStartTime +
+               configuration.humidity.interval * 1000)) <= 4000) {
+        humidityCounterStartTime -= 5000;
+      }
     }
 
-    if (temperatureTime - temperatureCounterStartTime >=
+    if (currentTime - temperatureCounterStartTime >=
         configuration.temperature.interval * 1000) {
       float newTemperature = getTemperature();
-      if (newTemperature != currentTemperature) {
-        currentTemperature = newTemperature;
-        temperatureInBuffer = true;
-      }
+      currentTemperature = newTemperature;
+      temperatureInBuffer = true;
       temperatureCounterStartTime = 0;
     }
 
-    if (humidityTime - humidityCounterStartTime >=
+    if (currentTime - humidityCounterStartTime >=
         configuration.humidity.interval * 1000) {
       float newHumidity = getHumidity();
-      if (newHumidity != currentHumidity) {
-        currentHumidity = newHumidity;
-        humidityInBuffer = true;
-      }
+      currentHumidity = newHumidity;
+      humidityInBuffer = true;
       humidityCounterStartTime = 0;
     }
   }
