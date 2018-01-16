@@ -31,7 +31,7 @@ private:
   const String generateSwitchItem(uint8_t id, boolean checked);
   const String generateRelayItem(boolean checked);
   const String generateLEDItem(boolean checked);
-  const String generateTwoValueController(RELAYSTAT configuration,
+  const String generateTwoValueController(REGULATOR configuration,
                                           boolean thermostat);
 
   /* Method addes configuration block to the site */

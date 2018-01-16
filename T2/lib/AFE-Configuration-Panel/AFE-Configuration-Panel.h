@@ -11,6 +11,7 @@
 #include "WProgram.h"
 #endif
 
+#include <AFE-Common-Configuration.h>
 #include <AFE-Device.h>
 #include <AFE-Sites-Generator.h>
 // include <Streaming.h>
@@ -41,7 +42,7 @@ public:
                                    RELAY data);
 
   String getRelayStatConfigurationSite(const String option, uint8_t command,
-                                       RELAYSTAT data, boolean thermostat);
+                                       REGULATOR data, boolean thermostat);
 
   String getSwitchConfigurationSite(const String option, uint8_t command,
                                     SWITCH data1, SWITCH data2);

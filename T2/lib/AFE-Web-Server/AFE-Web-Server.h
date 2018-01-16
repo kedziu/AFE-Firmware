@@ -44,8 +44,8 @@ private:
   NETWORK getNetworkData();
   MQTT getMQTTData();
   RELAY getRelayData();
-  RELAYSTAT getThermostateData();
-  RELAYSTAT getHumidistatData();
+  REGULATOR getThermostateData();
+  REGULATOR getHumidistatData();
   SWITCH getSwitchData(uint8_t id);
   LED getLEDData();
   DH getDHTData();

@@ -40,7 +40,7 @@ public:
   void saveConfiguration(MQTT configuration);
   void saveConfiguration(LED configuration);
   void saveConfiguration(RELAY configuration);
-  void saveConfiguration(RELAYSTAT configuration, boolean thermostat);
+  void saveConfiguration(REGULATOR configuration, boolean thermostat);
   void saveConfiguration(uint8_t id, SWITCH configuration);
   void saveConfiguration(DH configuration);
 

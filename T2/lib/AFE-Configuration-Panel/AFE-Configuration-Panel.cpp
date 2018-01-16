@@ -139,7 +139,7 @@ String AFEConfigurationPanel::getRelayConfigurationSite(const String option,
 }
 
 String AFEConfigurationPanel::getRelayStatConfigurationSite(
-    const String option, uint8_t command, RELAYSTAT data, boolean thermostat) {
+    const String option, uint8_t command, REGULATOR data, boolean thermostat) {
   if (command == SERVER_CMD_SAVE) {
     Data.saveConfiguration(data, thermostat);
   }

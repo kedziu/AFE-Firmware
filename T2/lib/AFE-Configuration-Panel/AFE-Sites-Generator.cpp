@@ -1148,7 +1148,7 @@ const String AFESitesGenerator::generateLEDItem(boolean checked) {
 }
 
 const String
-AFESitesGenerator::generateTwoValueController(RELAYSTAT configuration,
+AFESitesGenerator::generateTwoValueController(REGULATOR configuration,
                                               boolean thermostat) {
 
   String body = "<fieldset>";

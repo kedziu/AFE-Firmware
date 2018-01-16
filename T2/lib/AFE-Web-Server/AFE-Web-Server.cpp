@@ -101,7 +101,7 @@ void AFEWebServer::generate() {
                                                            getCommand(), data));
   } else if (getOptionName() == "thermostat" ||
              getOptionName() == "humidistat") {
-    RELAYSTAT data = {};
+    REGULATOR data = {};
     if (getCommand() == SERVER_CMD_SAVE) {
       getOptionName() == "thermostat" ? data = getThermostateData()
                                       : data = getHumidistatData();
@@ -310,8 +310,8 @@ RELAY AFEWebServer::getRelayData() {
   return data;
 }
 
-RELAYSTAT AFEWebServer::getThermostateData() {
-  RELAYSTAT data;
+REGULATOR AFEWebServer::getThermostateData() {
+  REGULATOR data;
   server.arg("te").length() > 0 ? data.enabled = true : data.enabled = false;
 
   if (server.arg("tn").length() > 0) {
@@ -333,9 +333,9 @@ RELAYSTAT AFEWebServer::getThermostateData() {
   return data;
 }
 
-RELAYSTAT AFEWebServer::getHumidistatData() {
+REGULATOR AFEWebServer::getHumidistatData() {
 
-  RELAYSTAT data;
+  REGULATOR data;
 
   server.arg("he").length() > 0 ? data.enabled = true : data.enabled = false;
 

@@ -195,7 +195,7 @@ void AFEDataAccess::saveConfiguration(RELAY configuration) {
   Eeprom.write(457, 3, configuration.thermalProtection);
 }
 
-void AFEDataAccess::saveConfiguration(RELAYSTAT configuration,
+void AFEDataAccess::saveConfiguration(REGULATOR configuration,
                                       boolean thermostat) {
 
   uint8_t idx;
