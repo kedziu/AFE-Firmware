@@ -15,7 +15,7 @@
 #include <AFE-Data-Structures.h>
 #include <ESP8266WiFi.h>
 
-#define FIRMWARE_TYPE 3
-#define FIRMWARE_VERSION "1.0.2"
+#define FIRMWARE_TYPE 0
+#define FIRMWARE_VERSION "1.0.1"
 
 #endif
